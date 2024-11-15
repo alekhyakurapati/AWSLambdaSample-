@@ -1,0 +1,7 @@
+*/**.js
+*/**.d.ts
+package-lock.json
+jest.config.js
+node_modules/
+data/
+ci/

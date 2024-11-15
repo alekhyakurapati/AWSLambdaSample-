@@ -1,0 +1,76 @@
+name: 'Deploying to Test'
+
+on:
+  push:
+    branches:
+      # You can enter the branch from which you would like to trigger this GH Action
+      - main
+
+jobs:
+  DeployTest:
+    name: DeployTest
+    runs-on: ubuntu-latest
+    # Same as what you specify during product provisioning
+    environment: Development
+    env:
+      AWS_REGION: ap-southeast-2
+      # Enter your Non-Prod AWS Account ID where you provisioned the product
+      AWS_ACCOUNT_ID: 783764607871
+      CDK_STAGE: test
+
+    # REQUIRED - Please do not remove.
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      # Checkout the source code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Set up node
+      - name: Install node v18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      # set up pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      #Install Dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      #Run Lint
+      - name: Lint
+        run: npm run lint
+
+      - name: Build & Compile Lambda
+        working-directory: ./lambdas
+        run: |
+          npm install
+          npm run build
+
+      #Run Test
+      #- name: Test
+      #  working-directory: ./lambdas
+      #  run: pnpm run test
+
+      # REQUIRED - Assume deployment role
+      - name: Assume deployment role
+        uses: Woodside/assume-deployment-role@v1
+        with:
+          deployment-role-name: 1e923800-91b2-11ef-bbc2-0adc686f2a67-GitHubDeploymentRole
+          aws-account-id: ${{ env.AWS_ACCOUNT_ID }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-duration-seconds: 3600
+
+      # Example of performing a CDK Deploy
+      - name: Install AWS CDK
+        run: npm install -g aws-cdk
+
+      - name: Run CDK Deploy
+        working-directory: ./infrastructure
+        run: |
+          npm install
+          cdk deploy --all --ci --context stage=$CDK_STAGE --require-approval never

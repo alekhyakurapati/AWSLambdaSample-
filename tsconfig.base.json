@@ -1,0 +1,59 @@
+// {
+//   "compilerOptions": {
+//     "target": "ES2020",
+//     "module": "commonjs",
+//     "lib": [
+//       "es2020",
+//       "dom"
+//     ],
+//     "declaration": true,
+//     "strict": true,
+//     "noImplicitAny": true,
+//     "strictNullChecks": true,
+//     "noImplicitThis": true,
+//     "alwaysStrict": true,
+//     "noUnusedLocals": false,
+//     "noUnusedParameters": false,
+//     "noImplicitReturns": true,
+//     "noFallthroughCasesInSwitch": false,
+//     "inlineSourceMap": true,
+//     "inlineSources": true,
+//     "experimentalDecorators": true,
+//     "strictPropertyInitialization": false,
+//     "typeRoots": [
+//       "./node_modules/@types"
+//     ]
+//   },
+//   "exclude": [
+//     "node_modules",
+//     "cdk.out"
+//   ]
+// }
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["es2020", "dom"],
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "typeRoots": ["./node_modules/@types"],
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules"]
+}

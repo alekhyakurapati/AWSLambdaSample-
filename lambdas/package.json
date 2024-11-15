@@ -1,0 +1,26 @@
+{
+  "name": "ecaas-vip-subscriber",
+  "version": "0.1.0",
+  "bin": {
+    "ecaas-vip-subscriber": "bin/ecaas-vip-subscriber.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.395.0",
+    "@aws-sdk/client-secrets-manager": "^3.405.0",
+    "@aws-sdk/client-sqs": "^3.405.0",
+    "@aws-sdk/util-dynamodb": "^3.395.0",
+    "@types/aws-lambda": "^8.10.119",
+    "node-fetch": "^2.7.0",
+    "pino": "^8.15.0",
+    "pino-pretty": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.4"
+  }
+}
